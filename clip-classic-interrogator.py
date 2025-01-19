@@ -528,6 +528,7 @@ class LabelTable():
                     "hash": np.array([ord(c) for c in hash], dtype=np.int8)
                 }
                 save_file(tensors, cache_filepath)
+                torch.cuda.empty_cache()
 
         if self.device == 'cpu' or self.device == torch.device('cpu'):
             self.embeds = [e.astype(np.float32) for e in self.embeds]
