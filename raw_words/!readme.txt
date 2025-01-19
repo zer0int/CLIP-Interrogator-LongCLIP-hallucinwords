@@ -1,0 +1,2 @@
+Those are just the raw hallucin-words from CLIP, prior to preprocessing with DBSCAN and implementing in the new CLIP-Interrogator 2025.
+If you want to poke around. Or use it as a DBSCAN exercise. In that case: Enjoy ~600 clusters of confusion, lol. =)
