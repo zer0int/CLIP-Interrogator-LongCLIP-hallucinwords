@@ -21,7 +21,6 @@ import torch.nn.functional as F
 from PIL import Image
 from colorama import Fore, Style
 import copy
-from adabelief_pytorch import AdaBelief
 from torch.cuda.amp import autocast, GradScaler
 scaler = GradScaler()
 
