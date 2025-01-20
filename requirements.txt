@@ -1,0 +1,9 @@
+colorama
+requests
+numpy
+Pillow
+tqdm
+safetensors
+transformers
+# torch
+# Note: Install PyTorch separately based on your hardware. Visit: https://pytorch.org/
