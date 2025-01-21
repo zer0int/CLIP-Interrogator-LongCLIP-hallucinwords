@@ -1,6 +1,5 @@
 git+https://github.com/openai/CLIP.git
 kornia
-torchvision
 matplotlib
 scikit-learn
 numpy
@@ -8,3 +7,5 @@ Pillow
 colorama
 # torch
 # Note: Install PyTorch separately based on your hardware. Visit: https://pytorch.org/
+# Optional, for gradient ascent with Long-CLIP:
+# Obtain Long-CLIP original base model: https://github.com/beichenzbc/Long-CLIP
