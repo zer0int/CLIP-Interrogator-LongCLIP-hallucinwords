@@ -2,6 +2,11 @@
 
 ### CLIP Interrogator, fully in HuggingFace Transformers 🤗, with LongCLIP & CLIP's own words and / or *your* own words!
 
+### Changes 22/JAN/25:
+- `python diy-0-run-gradient-ascent.py --model_name_or_path` now loads any [OpenAI-CLIP](https://github.com/openai/CLIP) or [Long-CLIP](https://github.com/beichenzbc/Long-CLIP) model:
+- Takes any .safetensors, .pt full model object OR state_dict.pt and infers which CLIP it is automatically. Except:
+- Case: A random .safetensors that is a Long-CLIP. I can't know where your base models are, so I'll prompt you for that once.
+------
 - 🔎 Why? Because even in 2025, CLIP is still SOTA for t2i / t2v models (as a Text Encoder)!
 - Refactored to use HuggingFace Transformers ✨, allows easy loading of custom CLIP models.
 - Also supports Long-CLIP models with 248 tokens. And basically any other CLIP. ✨
@@ -53,6 +58,7 @@ python clip-hallucin-interrogator.py --help
 - 🔎 Why? CLIP knows best what a CLIP sees (and will subsequently guide a diffusion model into).
 - But gradient ascent is expensive (compute). Give it a few representative images, get a CLIP 'opinion', re-use the words in CLIP-Interrogator for all images!✨
 - Usage: `python diy-0-run-gradient-ascent.py --img_folder path/to/myimages` (or `--img_folder images` as example)
+- 🆕 Optional: `--model_name_or_path` to load .safetensors or .pt of any OpenAI/CLIP or [Long-CLIP](https://github.com/beichenzbc/Long-CLIP) model
 - Then: `python diy-1-preprocess-words.py`. Result: a .txt file with all the words.
 - Clean them (manually review, delete weird ones), and replace `data/ownwords.txt` with the file.
 - 🕵️
