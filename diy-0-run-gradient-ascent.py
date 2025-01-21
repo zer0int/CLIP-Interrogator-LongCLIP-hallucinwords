@@ -232,13 +232,15 @@ def load_clip_model(model_name, device):
                 
             model.load_state_dict(state_dict, strict=False)
             model = model.to(device).eval().float()
-            print(Fore.MAGENTA + Style.BRIGHT + f"model.positional_embedding.shape: {model.positional_embedding.shape}")
+            text_pos_embed_shape = model.positional_embedding.shape
+            print(Fore.MAGENTA + Style.BRIGHT + f"model.positional_embedding.shape: {text_pos_embed_shape}")
     else:
         available_models = clip.available_models()
         if model_name in available_models:
             print(Fore.GREEN + Style.BRIGHT + f"Using OpenAI/CLIP model: {model_name}" + Fore.RESET)
             model, preprocess = clip.load(model_name, device)
             model = model.eval().float()
+            
             print(Fore.MAGENTA + Style.BRIGHT + f"model.positional_embedding.shape: {model.positional_embedding.shape}")
         else:
             if not os.path.exists(model_name) and not model_name in available_models:
@@ -348,7 +350,12 @@ class Pars(torch.nn.Module):
     def update_padding(self):
         """Update the padding tokens based on current number of active tokens."""
         
-        pad_length = text_pos_embed_shape - (self.many_tokens + len(self.prompt) + 1)
+        try:
+            pad_length = text_pos_embed_shape - (self.many_tokens + len(self.prompt) + 1)
+        except TypeError:
+            pad_length = 77 - (self.many_tokens + len(self.prompt) + 1)
+            
+
         self.pad = torch.zeros(self.batch_size, pad_length, 49408).cuda()
         self.pad[:, :, 49407] = 1
 
