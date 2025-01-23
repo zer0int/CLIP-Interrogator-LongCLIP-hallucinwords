@@ -36,18 +36,6 @@ from transformers import CLIPVisionModel, CLIPVisionConfig
 from transformers.utils import logging
 logging.set_verbosity_error()
 
-"""
-                            ------------- TO-DO --------------
-
-- Check flaves correctly working with normal interrogate (not just fast)
-
-- Make quiet so that it still prints the prompt AND the current image
-
-- Ensure custom HF can be loaded (for CLIP; check caption models?)
-
-- Check num_features and how that may be used?!
-
-"""
 def validate_clip_model(model_name):
     predefined_models = [
         'openai/clip-vit-large-patch14',# Original CLIP
