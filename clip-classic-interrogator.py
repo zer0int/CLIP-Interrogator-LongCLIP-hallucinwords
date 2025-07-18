@@ -44,6 +44,8 @@ def validate_clip_model(model_name):
         'zer0int/LongCLIP-L-Diffusers',# Original LongCLIP
         'zer0int/LongCLIP-GmP-ViT-L-14',# My GmP-LongCLIP
         'zer0int/LongCLIP-SAE-ViT-L-14'# My SAE-LongCLIP 
+        'zer0int/CLIP-KO-LITE-TypoAttack-Attn-Dropout-ViT-L-14' # My KO-CLIP / 2025
+        'zer0int/LongCLIP-KO-LITE-TypoAttack-Attn-ViT-L-14' # My KO-LongCLIP / 2025
         # Just use this argument to load a different CLIP from HuggingFace: --m_clip SomeDev/Some-CLIP-model
     ]
 
@@ -67,14 +69,14 @@ def validate_clip_model(model_name):
 def parse_arguments():
     parser = argparse.ArgumentParser(description='CLIP interrogator 2025')
     parser.add_argument('--m_caption', choices=['blip-base', 'blip-large', 'blip2-2.7b', 'blip2-flan-t5-xl', 'git-large-coco'], default='blip-large', type=str, help="Caption Model to use")
-    parser.add_argument('--m_clip', type=validate_clip_model, default='openai/clip-vit-large-patch14', help="Specify the HuggingFace CLIP model to use. For example: --m_clip zer0int/CLIP-GmP-ViT-L-14")
+    parser.add_argument('--m_clip', type=validate_clip_model, default='zer0int/LongCLIP-KO-LITE-TypoAttack-Attn-ViT-L-14', help="Specify the HuggingFace CLIP model to use. For example: --m_clip zer0int/CLIP-GmP-ViT-L-14")
     parser.add_argument('--mode', choices=['best', 'classic', 'fast', 'negative'], default='best', type=str, help="Mode to use for Captioning")
     parser.add_argument('--ownwords', action='store_true', help="Use ownwords.txt (put your own file in 'data/ownwords.txt' first!)")
     parser.add_argument('--output', choices=['rename', 'csv', 'txt', 'both'], default='csv', type=str, help="Rename image filenames, save captions as .csv, as individual .txt files, or as both .csv + .txt")
     parser.add_argument('--outfile', type=str, default='all', help="Filename for .csv; defaults to 'all' -> 'all.csv'")
     parser.add_argument('--maxfilename', default=48, type=int, help="Maximum caption / filename length (default: 48), only applies if used with: --output rename")
     parser.add_argument('--maxcaption', default=32, type=int, help="Maximum BLIP caption length, default: 32")
-    parser.add_argument('--chunk_size', default=2048, type=int, help="Batch size, default: 2048; reduce to e.g. 1024 or 512 to use less VRAM")
+    parser.add_argument('--chunk_size', default=1024, type=int, help="Batch size, default: 2048; reduce to e.g. 1024 or 512 to use less VRAM")
     parser.add_argument('--max_flavors', default=64, type=int, help="Maximum flavors in the Flavor Chain; default: 64")
     parser.add_argument('--image_folder', type=str, default='images', help="Defaults to 'images'; expects: /path/to/image/folder")
     parser.add_argument('--quiet', action='store_true', help="Run quietly, without verbose output")
